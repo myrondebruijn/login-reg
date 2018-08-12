@@ -12,6 +12,8 @@ if(isset($_POST)){
 	}else{
 		echo "False information";
 	}
+
+	echo "<br>Session user: ". $_SESSION['username'];
 }
 
 ?>
