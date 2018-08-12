@@ -1,8 +1,17 @@
 <?php
-session_start()
+session_start();
+include_once 'classes/user.php';
+
+$user = new User();
 
 if(isset($_POST)){
-	// todo check the login salt etc if it matches maybe make a class for it
+	$login = $user->check_login($_POST['email'], $_POST['password']);
+
+	if($login){
+		echo "Correct information";
+	}else{
+		echo "False information";
+	}
 }
 
 ?>
@@ -13,7 +22,7 @@ if(isset($_POST)){
 </head>
 <body>
 <h4>Login: </h4>
-<form>
+<form method="POST" action="">
 	<input type="text" name="email" placeholder="Email: ">
 	<input type="password" name="password" placeholder="Password: ">
 	<input type="submit" value="Login">
