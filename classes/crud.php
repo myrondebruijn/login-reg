@@ -22,5 +22,16 @@ class Crud extends DBConfig{
 
 		return $rows;
 	}
+
+	public function insert($query){
+		$result = $this->connection->query($query);
+
+		if($result == false){
+			echo "Could not insert data to the database";
+			return false;
+		}else{
+			return true;
+		}
+	}
 }
 ?>
