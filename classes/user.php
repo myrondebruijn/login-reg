@@ -7,17 +7,17 @@ class User{
 		$this->db = new mysqli("localhost", "root", "", "project");
 	}
 
-	public function check_login($username, $password){
+	public function check_login($email, $password){
 		$password = md5($password);
 		$conn = new mysqli("localhost", "root", "", "project");
 
-		$sql = "SELECT * from users WHERE username='$username' AND password='$password'";
+		$sql = "SELECT * from users WHERE email='$email' AND password='$password'";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
 		    while($row = $result->fetch_assoc()) {
 	            $_SESSION['login'] = true;
-	            $_SESSION['username'] = $row['username'];
+	            $_SESSION['email'] = $row['email'];
 	            return true;
 		    }
 		}else{
@@ -35,7 +35,7 @@ class User{
         $count_row = $check->num_rows;
         //if the username is not in db then insert to the table
         if ($count_row == 0){
-            $sql1="INSERT INTO users SET username='$username', password='$password', email='$name'";
+            $sql1="INSERT INTO users SET username='$username', password='$password', email='$email'";
             echo $sql1;
             $result = mysqli_query($this->db,$sql1) or die(mysqli_connect_errno()."Data cannot inserted");
             return $result;

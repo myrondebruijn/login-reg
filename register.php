@@ -4,20 +4,15 @@ include_once 'classes/user.php';
 
 $user = new User();
 
-if (isset($_POST)) {
-	echo "POST";
+if(isset($_POST['submit'])){
+	$register = $user->register_user($_POST['username'], $_POST['password'], $_POST['email']);
+
+	if($register){
+		echo "User is registered";
+	}else{
+		echo "Registration failed, this username or email is already registered";
+	}
 }
-
-// if(isset($_POST)){
-// echo "POST";
-// 	$register = $user->register_user($_POST['username'], $_POST['password'], $_POST['email']);
-
-// 	if($register){
-// 		echo "User is registered";
-// 	}else{
-// 		echo "Registration failed, this username or email is already registered";
-// 	}
-// }
 
 
 ?>
@@ -29,10 +24,10 @@ if (isset($_POST)) {
 <body>
 <h4>Register here:</h4>
 <form method="POST" action="">
-	<input type="text" name="username">
-	<input type="password" name="password">
-	<input type="email" name="email">
-	<input type="submit" value="Login">
+	<input type="text" name="username" placeholder="Username: ">
+	<input type="password" name="password" placeholder="Password: ">
+	<input type="email" name="email" placeholder="Email: ">
+	<input type="submit" value="Login" name="submit">
 </form>
 </body>
 </html>
